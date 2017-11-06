@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			#redDiv{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="redDiv"></div>
+	</body>
+	<script type="text/javascript" src="tween.js"></script>
+	<script type="text/javascript" src="animation.js"></script>
+	<script type="text/javascript">
+		var redDiv=document.getElementById("redDiv");
+		redDiv.onclick=function(){
+			// var t=0;//初始值，因为一开始球在最左边，因此是0
+			// var b=0; //从什么位置开始
+			// var c=600;//移动多少距离
+			// var d=100;//移动需要的总步数，总步数*定时器间隔就是动画的总时长	
+		// 	var timer=setInterval(function(){
+		// 		redDiv.style.marginTop=Tween.Elastic.easeInOut(t,b,c,d)+"px"
+		// 		redDiv.style.marginLeft=Tween.Elastic.easeInOut(t,b,c,d)+"px"
+		// 		t++;
+		// 		if(t>d){
+		// 			clearInterval(timer);
+		// 		}
+		// 	},10);
+		// }
+		Math.animation(0, 600, 1000, "Elastic.easeInOut", function(value,isEnding){
+			redDiv.style.marginTop=value+"px";
+			// 第一段动画结束之后，开始第二段动画
+			if(isEnding){
+				Math.animation(0, 600, 1000, "Elastic.easeInOut", function(value,isEnding){
+			redDiv.style.marginLeft=value+"px";
+			
+				if(isEnding){
+				Math.animation(600, 0, 1000, "Elastic.easeInOut", function(value,isEnding){
+			redDiv.style.marginTop=value+"px";
+			
+				if(isEnding){
+				Math.animation(600, 0, 1000, "Elastic.easeInOut", function(value,isEnding){
+			redDiv.style.marginLeft=value+"px";
+			})
+				
+			};
+			})};
+			})};
+		});
+		// form和to是必须参数，表示动画起始数值和结束数值；
+		// duration，easing，callback理论上都是可选参数，但是实际上callback肯定是要使用的，因为实时变化的数值就是通过callback返回的。然后，duration，easing，callback这3个参数的顺序是任意的。具体来讲：
+		// duration为动画持续时间，默认300，默认单位是毫秒，建议使用数值，例如600，也支持带单位，例如600ms或者0.6s；
+		// easing为缓动的类型，字符串类型，源自Tween.js。例如：'Linear'，'Quad.easeIn'，'Bounce.easeInOut'等等，需要注意大小写。 其中，默认值是'Linear'；
+		// callback为回调函数，支持2个参数（value, isEnding），其中value表示实时变化的计算值，isEnding是布尔值，表示动画是否完全停止。
+	}
+	</script>
+</html>
